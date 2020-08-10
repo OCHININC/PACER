@@ -12,10 +12,10 @@ services:
     ports:
       - "8080:8080"
     environment:
-      JDBC_URL: "jdbc:postgresql://db:5432/db"
-      JDBC_USERNAME: "postgres"
-      JDBC_PASSWORD: "postgres"
-    command: ["./wait-for-it.sh", "db:5432", "--timeout=300", "--" , "java", "-jar", "/usr/src/app/CQLStorage.jar"]
+      JDBC_URL: "${JDBC_URL:-jdbc:postgresql://db:5432/db}"
+      JDBC_USERNAME: "${JDBC_USERNAME:-postgres}"
+      JDBC_PASSWORD: "${JDBC_PASSWORD:-postgres}"
+    command: ["java", "-jar", "/usr/src/app/CQLStorage.jar"]
 
   db:
     build:
@@ -42,12 +42,12 @@ services:
     ports:
       - "8082:8080"
     environment:
-      JDBC_URL: "jdbc:postgresql://db:5432/db"
-      JDBC_USER: "postgres"
-      JDBC_PASSWORD: "postgres"
+      JDBC_URL: "${JDBC_URL:-jdbc:postgresql://db:5432/db}"
+      JDBC_USERNAME: "${JDBC_USERNAME:-postgres}"
+      JDBC_PASSWORD: "${JDBC_PASSWORD:-postgres}"
       BASIC_USERNAME: "username"
       BASIC_PASSWORD: "password"
-    command: ["./wait-for-it.sh", "db:5432", "--timeout=300", "--" ,"catalina.sh", "run"]
+    command: ["catalina.sh", "run"]
 
   nginx-cache:
     depends_on:
@@ -99,4 +99,4 @@ services:
       LOCAL_PYPASS: "True"
       AUTH_TYPE: "Basic client:secret" #Update to local translate service basic credentials
       MAPPING_TERMINOLOGY_URL: "https://apps.hdap.gatech.edu/gt-fhir/fhir/ConceptMap/" #Update to local translate service
-    command: ["./wait-for-it.sh", "db:5432", "--timeout=300", "--" ,"catalina.sh", "run"]
+    command: ["catalina.sh", "run"]
