@@ -70,8 +70,8 @@ services:
       #Change to fhir data provider within the internal EHR
       CQL_EXECUTION_DATA_SERVICE: "${CQL_EXECUTION_DATA_SERVICE:-https://apps.hdap.gatech.edu/gt-fhir/fhir/}"
       #Basic authentication credentials to the data service
-      CQL_EXECUTION_DATA_USER: "client"
-      CQL_EXECUTION_DATA_PASS: "secret"
+      CQL_EXECUTION_DATA_USER: "${CQL_EXECUTION_DATA_USER:-client}"
+      CQL_EXECUTION_DATA_PASS: "${CQL_EXECUTION_DATA_PASS:-secret}"
       #Change if you want to use a seperate terminology service
       CQL_EXECUTION_TERMINOLOGY_SERVICE: "https://cts.nlm.nih.gov/fhir/"
       #Authorization credentials to the terminology service
@@ -79,12 +79,12 @@ services:
       CQL_EXECUTION_CODEMAPPER_SERVICE: "http://nginx-cache:8080/fhir/"
       CQL_EXECUTION_CODEMAPPER_USER: "client" #Update to your translate server credentials
       CQL_EXECUTION_CODEMAPPER_PASS: "secret" #Update to your translate server credentials
-      CQL_EXECUTION_CODEMAPPER_SYSTEMS_MAP: '{}'#'{"http://www.nlm.nih.gov/research/umls/rxnorm":"http://hl7.org/fhir/ndfrt"}'
+      CQL_EXECUTION_CODEMAPPER_SYSTEMS_MAP: '{}' #'{"http://www.nlm.nih.gov/research/umls/rxnorm":"http://hl7.org/fhir/ndfrt"}'
       CQL_EXECUTION_TERMINOLOGY_USER: "jduke99" #Update to your terminology credentials
       CQL_EXECUTION_TERMINOLOGY_PASS: "v6R4*SsU39" #Update to your terminology credentials
       CQL_EXECUTION_URL: "cql-execution"
       CQL_STORAGE_URL: "cql-storage"
-      FHIR_FILTER_URL: "apps.hdap.gatech.edu"
+      FHIR_FILTER_URL: "fhir-filter"
 
   translateconcept:
     depends_on:
